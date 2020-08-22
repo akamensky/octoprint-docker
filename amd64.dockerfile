@@ -1,6 +1,6 @@
 ARG OCTOPRINT_VERSION=1.4.2
 
-FROM python:${PYTHON_BASE_IMAGE} AS build
+FROM python:3.7.9-slim-buster AS build
 
 RUN groupadd --gid 1000 octoprint && \
     useradd --uid 1000 --gid octoprint -G dialout --shell /bin/bash -d /opt/octoprint octoprint

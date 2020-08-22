@@ -6,7 +6,7 @@ RUN apk add curl && curl -L ${QEMU_URL} | tar zxvf - -C . --strip-components 1
 
 ARG OCTOPRINT_VERSION=1.4.2
 
-FROM arm32v7/python:${PYTHON_BASE_IMAGE} AS build
+FROM arm32v7/python:3.7.9-slim-buster AS build
 
 # Add QEMU
 COPY --from=qemu qemu-arm-static /usr/bin
@@ -22,7 +22,7 @@ RUN chown -R octoprint:octoprint /opt/octoprint
 RUN cd /opt && tar zcvf octoprint.tar.gz octoprint
 
 
-FROM python:3.7.9-slim-buster
+FROM arm32v7/python:3.7.9-slim-buster
 
 LABEL description="The snappy web interface for your 3D printer"
 LABEL issues="github.com/akamensky/octoprint-docker/issues"
