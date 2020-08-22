@@ -6,7 +6,7 @@ RUN groupadd --gid 1000 octoprint && \
 RUN apt-get update && apt-get install -y build-essential curl
 RUN pip install virtualenv
 RUN virtualenv /opt/octoprint
-RUN source /opt/octoprint/bin/activate && pip install octoprint==1.4.2
+RUN . /opt/octoprint/bin/activate && pip install octoprint==1.4.2
 RUN chown -R octoprint:octoprint /opt/octoprint
 RUN cd /opt && tar zcvf octoprint.tar.gz octoprint
 
