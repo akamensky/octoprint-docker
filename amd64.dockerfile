@@ -27,7 +27,8 @@ ENV PATH="/opt/octoprint/bin:$PATH"
 
 EXPOSE 5000
 COPY entrypoint.sh /
+RUN chmod ugo+x /entrypoint.sh && mkdir /opt/octoprint && chown -R octoprint:octoprint /opt/octoprint
 USER octoprint
 VOLUME /opt/octoprint
-ENTRYPOINT ["entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["octoprint", "serve"]

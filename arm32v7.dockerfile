@@ -20,7 +20,10 @@ RUN chown -R octoprint:octoprint /opt/octoprint
 RUN cd /opt && tar zcvf octoprint.tar.gz octoprint
 
 
-FROM  arm32v7/python:3.7.9-slim-buster
+FROM arm32v7/python:3.7.9-slim-buster
+
+# Add QEMU
+COPY --from=qemu qemu-arm-static /usr/bin
 
 LABEL description="The snappy web interface for your 3D printer"
 LABEL issues="github.com/akamensky/octoprint-docker/issues"
@@ -36,7 +39,8 @@ ENV PATH="/opt/octoprint/bin:${PATH}"
 
 EXPOSE 5000
 COPY entrypoint.sh /
+RUN chmod ugo+x /entrypoint.sh && mkdir /opt/octoprint && chown -R octoprint:octoprint /opt/octoprint
 USER octoprint
 VOLUME /opt/octoprint
-ENTRYPOINT ["entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["octoprint", "serve"]

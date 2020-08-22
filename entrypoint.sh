@@ -1,8 +1,10 @@
 #!/usr/bin/env sh
 
-if [ ! -d "/opt/octoprint" ]; then
+if [ ! -d "/opt/octoprint/bin" ]; then
   echo "Extracting octoprint"
-  tar x /opt/octoprint.tar.gz -C /opt
+  tar -xf /opt/octoprint.tar.gz --strip-components=1 -C /opt/octoprint
 fi
+
+chown -R octoprint:octoprint /opt/octoprint
 
 exec "$@"
