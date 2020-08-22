@@ -5,7 +5,7 @@ ENV QEMU_URL https://github.com/balena-io/qemu/releases/download/v3.0.0%2Bresin/
 RUN apk add curl && curl -L ${QEMU_URL} | tar zxvf - -C . --strip-components 1
 
 ARG PYTHON_BASE_IMAGE=3.7.9-slim-buster
-ARG OCTOPRINT_VERSION
+ARG OCTOPRINT_VERSION=1.4.2
 
 FROM arm64v8/python:${PYTHON_BASE_IMAGE} AS build
 
