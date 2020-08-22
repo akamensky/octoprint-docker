@@ -4,12 +4,12 @@ FROM alpine AS qemu
 ENV QEMU_URL https://github.com/balena-io/qemu/releases/download/v3.0.0%2Bresin/qemu-3.0.0+resin-aarch64.tar.gz
 RUN apk add curl && curl -L ${QEMU_URL} | tar zxvf - -C . --strip-components 1
 
+FROM arm64v8/python:3.7.9-slim-buster AS build
+
 ARG PYTHON_BASE_IMAGE
 ENV PYTHON_BASE_IMAGE ${PYTHON_BASE_IMAGE:-3.7.9-slim-buster}
 ARG OCTOPRINT_VERSION
 ENV OCTOPRINT_VERSION ${OCTOPRINT_VERSION:-1.4.2}
-
-FROM arm64v8/python:3.7.9-slim-buster AS build
 
 # Add QEMU
 COPY --from=qemu qemu-aarch64-static /usr/bin

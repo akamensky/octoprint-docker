@@ -1,9 +1,9 @@
+FROM python:3.7.9-slim-buster AS build
+
 ARG PYTHON_BASE_IMAGE
 ENV PYTHON_BASE_IMAGE ${PYTHON_BASE_IMAGE:-3.7.9-slim-buster}
 ARG OCTOPRINT_VERSION
 ENV OCTOPRINT_VERSION ${OCTOPRINT_VERSION:-1.4.2}
-
-FROM python:3.7.9-slim-buster AS build
 
 RUN groupadd --gid 1000 octoprint && \
     useradd --uid 1000 --gid octoprint -G dialout --shell /bin/bash -d /opt/octoprint octoprint
