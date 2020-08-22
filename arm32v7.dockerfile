@@ -4,7 +4,7 @@ FROM alpine AS qemu
 ENV QEMU_URL https://github.com/balena-io/qemu/releases/download/v3.0.0%2Bresin/qemu-3.0.0+resin-arm.tar.gz
 RUN apk add curl && curl -L ${QEMU_URL} | tar zxvf - -C . --strip-components 1
 
-FROM arm32v7/python:${PYTHON_BASE_IMAGE} AS build
+FROM arm32v7/python:3.7.9-slim-buster AS build
 
 # Add QEMU
 COPY --from=qemu qemu-arm-static /usr/bin
@@ -20,7 +20,7 @@ RUN chown -R octoprint:octoprint /opt/octoprint
 RUN cd /opt && tar zcvf octoprint.tar.gz octoprint
 
 
-FROM  arm32v7/python:${PYTHON_BASE_IMAGE}
+FROM  arm32v7/python:3.7.9-slim-buster
 
 LABEL description="The snappy web interface for your 3D printer"
 LABEL issues="github.com/akamensky/octoprint-docker/issues"
