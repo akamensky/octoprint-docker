@@ -9,7 +9,7 @@ ENV PYTHON_BASE_IMAGE ${PYTHON_BASE_IMAGE:-3.7.9-slim-buster}
 ARG OCTOPRINT_VERSION
 ENV OCTOPRINT_VERSION ${OCTOPRINT_VERSION:-1.4.2}
 
-FROM arm32v5/python:${PYTHON_BASE_IMAGE} AS build
+FROM arm32v5/python:3.7.9-slim-buster AS build
 
 # Add QEMU
 COPY --from=qemu qemu-arm-static /usr/bin
@@ -25,7 +25,7 @@ RUN chown -R octoprint:octoprint /opt/octoprint
 RUN cd /opt && tar zcvf octoprint.tar.gz octoprint
 
 
-FROM arm32v5/python:${PYTHON_BASE_IMAGE}
+FROM arm32v5/python:3.7.9-slim-buster
 
 LABEL description="The snappy web interface for your 3D printer"
 LABEL issues="github.com/akamensky/octoprint-docker/issues"
