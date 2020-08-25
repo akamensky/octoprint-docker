@@ -4,11 +4,6 @@ manifests:
     platform:
       architecture: amd64
       os: linux
-  - image: akamenskiy/octoprint:arm32v5
-    platform:
-      architecture: arm
-      os: linux
-      variant: v5
   - image: akamenskiy/octoprint:arm32v7
     platform:
       architecture: arm
